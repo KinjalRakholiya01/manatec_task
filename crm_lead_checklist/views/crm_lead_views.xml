@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Inherit: Lead Form View for Checklist -->
+    <record id="crm_lead_view_form_checklist" model="ir.ui.view">
+        <field name="name">crm.lead.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="checklist" string="Checklist">
+                    <field name="progress_rate" widget="progressbar"/>
+                    <field mode="tree" name="lead_checklist_ids">
+                        <tree create="false" delete="false" editable="top">
+                            <field name="is_check" string=" "/>
+                            <field name="name" readonly="1"/>
+                            <field invisible="1" name="lead_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!-- Inherit: Lead Form(Quick Create) View for Checklist-->
+    <record id="quick_create_opportunity_form_checklist" model="ir.ui.view">
+        <field name="name">crm.lead.form.quick_create</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_currency']" position="before">
+                <div class="o_row">
+                    <field class="oe_inline pr-4" name="progress_rate" widget="progressbar"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- Inherit: Lead Kanban View for Checklist -->
+    <record id="crm_case_kanban_view_leads_checklist" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.lead</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <field name="company_currency" position="after">
+                <field name="progress_rate"/>
+            </field>
+            <xpath expr="//div[hasclass('oe_kanban_content')]" position="inside">
+                <div class="o_row">
+                    <field class="oe_inline pr-4" name="progress_rate" widget="progressbar"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

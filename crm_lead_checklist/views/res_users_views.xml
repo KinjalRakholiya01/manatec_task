@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Inherit: Users Form View for Checklist -->
+    <record id="view_users_form_checklist" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="checklist" string="Checklist">
+                    <field name="lead_checklist_ids" mode="tree">
+                        <tree editable="top">
+                            <field name="name"/>
+                            <field name="user_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
