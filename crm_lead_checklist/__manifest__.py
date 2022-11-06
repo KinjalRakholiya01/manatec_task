@@ -8,6 +8,8 @@
     'description': """
         CRM
         ====================
+        - Checklist Configure in User
+        - Auto Create Checklist in Every Lead as per User's Checklist
 
     """,
     'category': 'CRM',

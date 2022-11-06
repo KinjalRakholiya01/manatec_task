@@ -7,4 +7,5 @@ class ResUsers(models.Model):
     _inherit = 'res.users'
     _description = 'Users'
 
-    lead_checklist_ids = fields.One2many('lead.checklist.user', 'user_id')
+    lead_checklist_ids = fields.One2many(
+        'lead.checklist.user', 'user_id', string='Checklist')

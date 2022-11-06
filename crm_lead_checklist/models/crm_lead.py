@@ -14,11 +14,12 @@ class Lead(models.Model):
                 lambda x: x.is_check)) / len(rec.lead_checklist_ids) * 100) if rec.lead_checklist_ids else 0
 
     lead_checklist_ids = fields.One2many('lead.checklist', 'lead_id')
-    progress_rate = fields.Float(compute=_compute_progress)
+    progress_rate = fields.Float(compute=_compute_progress, string='Progress Rate')
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            # Auto Create Checklist list from checklist configuration in User
             if vals.get('user_id'):
                 user_id = self.env['res.users'].browse(vals.get('user_id'))
                 checklist_data = [{
