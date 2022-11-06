@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'CRM Lead Checklist',
+    'name': 'Lead Checklist',
     'version': '1.1',
-    'summary': 'CRM Lead Checklist',
+    'summary': 'Lead Checklist',
     'sequence': 1,
     'description': """
         CRM
@@ -14,7 +14,7 @@
     """,
     'category': 'CRM',
     'website': '',
-    'images': [],
+    'images': ['static/description/icon.png'],
     'depends': ['base', 'crm'],
     'data': [
         'security/ir.model.access.csv',
@@ -30,4 +30,5 @@
     'assets': {
     },
     'license': 'LGPL-3',
+
 }

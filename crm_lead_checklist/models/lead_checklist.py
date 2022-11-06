@@ -11,18 +11,18 @@ class LeadChecklistUser(models.Model):
     name = fields.Char('Name', copy=False, required=True)
     user_id = fields.Many2one('res.users')
 
-    _sql_constraints = [('name_user_id_uniq', 'unique (name, user_id,\
-                        is_active)', 'Name must be unique per User!')]
-
     def unlink(self):
         for rec in self:
-            # Check if current checklist checked in any Lead or not
             lead_check_ids = self.env['lead.checklist'].search(
-                [('checklist_lead_id', '=', rec.id), ('is_check', '=', True)])
-            for lead in lead_check_ids:
+                [('checklist_lead_id', '=', rec.id)])
+            # Check if current checklist checked in any Lead or not
+            for checked_lead in lead_check_ids.filtered(lambda x: x.is_check):
                 raise UserError(_("You can not delete %s Checklist.\
                     First uncheck %s checklist from %s Lead") % (
-                    rec.name, rec.name, lead.lead_id.name))
+                    rec.name, rec.name, checked_lead.lead_id.name))
+            # auto delete current checklist in any Lead
+            for lead in lead_check_ids:
+                lead.unlink()
         super(LeadChecklistUser, self).unlink()
 
 
